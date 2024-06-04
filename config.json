@@ -1,0 +1,2205 @@
+{
+  "global_config": {
+    "expected_fatals": [
+      {
+        "pattern": "",
+        "target": "/home/nutanix/data/logs/metropolis.out*"
+      },
+      {
+        "pattern": "",
+        "target": "/home/nutanix/data/logs/log_collector.out*"
+      },
+      {
+        "pattern": "Could not poll for tasks in Ergon",
+        "target": "/home/nutanix/data/logs/dpm_server.out*"
+      },
+      {
+        "pattern": "",
+        "target": "/home/nutanix/data/logs/vulcan.out*"
+      },
+      {
+        "pattern": "",
+        "target": "/home/nutanix/data/logs/cfs.out*"
+      }
+    ],
+    "ncc_url": "",
+    "pre_run": [
+      {
+        "name": "workflows.draas.esx_helper.EsxHelper.draas_esx_pre_run",
+        "stage": "CLASS_PRERUN"
+      },
+      {
+        "name": "workflows.draas.draas_library.setup_mock_anc",
+        "stage": "TEST_PRERUN"
+      }
+    ],
+    "test_timeout": 10800
+  },
+  "test_config": {
+    "dr.draas.rpj_type_test_failover.test_ngt_failover.NgtTestFailover": {
+      "resource_spec": [
+        {
+          "config": {
+            "path": "testcases/dr/draas/topology/onprem_3pe_2pc.json"
+          },
+          "type": "$TOPOLOGY"
+        }
+      ],
+      "setup_timeout": 3600,
+      "test_timeout": 3600
+    },
+    "dr.draas.rpj_type_test_failover.test_ngt_failover.NgtTestFailover.test_ngt_test_failover": {
+      "test_args": {
+        "categories": [
+          {
+            "category": {
+              "office": "sales"
+            },
+            "uvm_count": 1
+          }
+        ],
+        "image": "http://endor.dyn.nutanix.com/GoldImages/Linux_ngt/AHV/Centos7.0_64_NGT.qcow2",
+        "image_name": "CentOS_NGT",
+        "protection_rule_categories": [
+          {
+            "category": {
+              "office": "sales"
+            },
+            "filter_type": "CATEGORY"
+          }
+        ],
+        "recovery_plan_stages": [
+          {
+            "category": {
+              "office": "sales"
+            },
+            "entity_filter_type": "CATEGORIES"
+          }
+        ]
+      }
+    },
+    "dr.draas.rpj_type_test_failover.test_ngt_failover.NgtTestFailover.test_ngt_test_failover___esx": {
+      "Metadata": {
+        "Requirements": [
+          "FEAT-7207"
+        ],
+        "Tags": [
+          "$DEPRECATED"
+        ]
+      },
+      "merge_resource_spec_by_name": true,
+      "resource_spec": [
+        {
+          "config": {
+            "path": "testcases/dr/draas/topology/onprem_esx_3pe_2pc.json"
+          },
+          "type": "$TOPOLOGY"
+        }
+      ],
+      "test_args": {
+        "image_name": "Centos7.0-64NGT",
+        "image_version": "1.0"
+      }
+    },
+    "dr.draas.rpj_type_test_failover.test_ngt_failover.NgtTestFailover.test_ngt_test_failover___esx_xi": {
+      "Metadata": {
+        "Requirements": [
+          "FEAT-8269"
+        ],
+        "Tags": [
+          "$DEPRECATED"
+        ]
+      },
+      "expected_fatals": [
+        {
+          "pattern": "",
+          "target": "/home/nutanix/data/logs/insights_*"
+        },
+        {
+          "pattern": "",
+          "target": "/home/nutanix/data/logs/ncc_output_collector.out*"
+        }
+      ],
+      "merge_expected_fatals": true,
+      "merge_resource_spec_by_name": true,
+      "resource_spec": [
+        {
+          "config": {
+            "params": {
+              "is_xi": true,
+              "pe_1_hypervisor_type": "$ESX",
+              "pe_1_hypervisor_version": "7.0.0",
+              "pe_1_hypervisors": [
+                "vsphere"
+              ],
+              "pe_2_hypervisors": [
+                "ahv"
+              ],
+              "pe_3_hypervisors": [
+                "ahv"
+              ],
+              "reg_to_vcenter": true,
+              "static_ips": 4
+            },
+            "path": "testcases/dr/draas/template/3pe_2pc.j2"
+          },
+          "type": "$TEMPLATE"
+        }
+      ]
+    },
+    "dr.draas.rpj_type_test_failover.test_ngt_failover.NgtTestFailover.test_ngt_test_failover___xi": {
+      "Metadata": {
+        "Tags": [
+          "$DEPRECATED"
+        ]
+      },
+      "expected_fatals": [
+        {
+          "pattern": "",
+          "target": "/home/nutanix/data/logs/insights_*"
+        },
+        {
+          "pattern": "",
+          "target": "/home/nutanix/data/logs/ncc_output_collector.out*"
+        }
+      ],
+      "merge_expected_fatals": true,
+      "resource_spec": [
+        {
+          "config": {
+            "path": "testcases/dr/draas/topology/xi_3pe_2pc.json"
+          },
+          "type": "$TOPOLOGY"
+        }
+      ],
+      "test_args": {
+        "setup_ngt_on_xi": true
+      }
+    },
+    "dr.draas.rpj_type_test_failover.test_ngt_failover.NgtTestFailover.test_ngt_test_failover_pointintime": {
+      "test_args": {
+        "categories": [
+          {
+            "category": {
+              "office": "sales"
+            },
+            "uvm_count": 1
+          }
+        ],
+        "image": "http://endor.dyn.nutanix.com/GoldImages/Linux_ngt/AHV/Centos7.0_64_NGT.qcow2",
+        "image_name": "CentOS_NGT",
+        "protection_rule_categories": [
+          {
+            "category": {
+              "office": "sales"
+            },
+            "filter_type": "CATEGORY"
+          }
+        ],
+        "recovery_plan_stages": [
+          {
+            "category": {
+              "office": "sales"
+            },
+            "entity_filter_type": "CATEGORIES"
+          }
+        ]
+      },
+      "test_timeout": 1800
+    },
+    "dr.draas.rpj_type_test_failover.test_ngt_failover.NgtTestFailover.test_ngt_test_failover_pointintime___esx": {
+      "Metadata": {
+        "Tags": [
+          "$WIP",
+          "$EST_80_PLUS_HRS"
+        ]
+      },
+      "merge_resource_spec_by_name": true,
+      "resource_spec": [
+        {
+          "config": {
+            "path": "testcases/dr/draas/topology/onprem_esx_3pe_2pc.json"
+          },
+          "type": "$TOPOLOGY"
+        }
+      ],
+      "test_args": {
+        "image_name": "Centos7.0-64NGT",
+        "image_version": "1.0"
+      }
+    },
+    "dr.draas.rpj_type_test_failover.test_ngt_failover.NgtTestFailover.test_ngt_test_failover_pointintime___esx_xi": {
+      "Metadata": {
+        "Tags": [
+          "$WIP",
+          "$EST_80_PLUS_HRS"
+        ]
+      },
+      "expected_fatals": [
+        {
+          "pattern": "",
+          "target": "/home/nutanix/data/logs/insights_*"
+        },
+        {
+          "pattern": "",
+          "target": "/home/nutanix/data/logs/ncc_output_collector.out*"
+        }
+      ],
+      "merge_expected_fatals": true,
+      "merge_resource_spec_by_name": true,
+      "resource_spec": [
+        {
+          "config": {
+            "params": {
+              "is_xi": true,
+              "pe_1_hypervisor_type": "$ESX",
+              "pe_1_hypervisor_version": "7.0.0",
+              "pe_1_hypervisors": [
+                "vsphere"
+              ],
+              "pe_2_hypervisors": [
+                "ahv"
+              ],
+              "pe_3_hypervisors": [
+                "ahv"
+              ],
+              "reg_to_vcenter": true,
+              "static_ips": 4
+            },
+            "path": "testcases/dr/draas/template/3pe_2pc.j2"
+          },
+          "type": "$TEMPLATE"
+        }
+      ],
+      "test_args": {
+        "image_name": "Centos7.0-64NGT",
+        "image_version": "1.0"
+      }
+    },
+    "dr.draas.rpj_type_test_failover.test_ngt_failover.NgtTestFailover.test_ngt_test_failover_pointintime___xi": {
+      "expected_fatals": [
+        {
+          "pattern": "",
+          "target": "/home/nutanix/data/logs/insights_*"
+        },
+        {
+          "pattern": "",
+          "target": "/home/nutanix/data/logs/ncc_output_collector.out*"
+        }
+      ],
+      "merge_expected_fatals": true,
+      "resource_spec": [
+        {
+          "config": {
+            "path": "testcases/dr/draas/topology/xi_3pe_2pc.json"
+          },
+          "type": "$TOPOLOGY"
+        }
+      ],
+      "test_args": {
+        "setup_ngt_on_xi": true
+      }
+    },
+    "dr.draas.rpj_type_test_failover.test_rpj_failover_network.DraasTestFailover": {
+      "resource_spec": [
+        {
+          "config": {
+            "path": "testcases/dr/draas/topology/onprem_3pe_2pc.json"
+          },
+          "type": "$TOPOLOGY"
+        }
+      ],
+      "test_args": {
+        "dummy_vm": false,
+        "test_subnet_details": {
+          "ip_config": {
+            "default_gateway_ip": "10.5.120.1",
+            "pool_list": [
+              {
+                "range": "10.5.120.2 10.5.127.253"
+              }
+            ],
+            "prefix_length": 21,
+            "subnet_ip": "10.5.120.0"
+          },
+          "name": "vlan1214",
+          "vlan_id": 1214
+        },
+        "validate_network": true
+      }
+    },
+    "dr.draas.rpj_type_test_failover.test_rpj_failover_network.DraasTestFailover.test_network_failure_while_rp_execution_in_progress": {
+      "test_args": {
+        "categories": [
+          {
+            "category": {
+              "play": "sports"
+            },
+            "uvm_count": 1
+          },
+          {
+            "category": {
+              "play": "games"
+            },
+            "uvm_count": 1
+          },
+          {
+            "category": {
+              "play": "music"
+            },
+            "uvm_count": 1
+          }
+        ],
+        "protection_rule_categories": [
+          {
+            "category": {
+              "play": "sports"
+            },
+            "filter_type": "CATEGORY"
+          },
+          {
+            "category": {
+              "play": "games"
+            },
+            "filter_type": "CATEGORY"
+          },
+          {
+            "category": {
+              "play": "music"
+            },
+            "filter_type": "CATEGORY"
+          }
+        ],
+        "recovery_plan_stages": [
+          {
+            "category": {
+              "play": "sports"
+            },
+            "entity_filter_type": "CATEGORIES"
+          },
+          {
+            "category": {
+              "play": "games"
+            },
+            "entity_filter_type": "CATEGORIES"
+          },
+          {
+            "category": {
+              "play": "music"
+            },
+            "entity_filter_type": "CATEGORIES"
+          }
+        ]
+      }
+    },
+    "dr.draas.rpj_type_test_failover.test_rpj_failover_network.DraasTestFailover.test_network_failure_while_rp_execution_in_progress___esx": {
+      "Metadata": {
+        "Requirements": [
+          "FEAT-7207"
+        ]
+      },
+      "merge_resource_spec_by_name": true,
+      "resource_spec": [
+        {
+          "config": {
+            "path": "testcases/dr/draas/topology/onprem_esx_3pe_2pc.json"
+          },
+          "type": "$TOPOLOGY"
+        }
+      ],
+      "test_args": {
+        "use_default_ipam": false
+      }
+    },
+    "dr.draas.rpj_type_test_failover.test_rpj_failover_network.DraasTestFailover.test_network_failure_while_rp_execution_in_progress___esx_xi": {
+      "Metadata": {
+        "Requirements": [
+          "FEAT-8269"
+        ],
+        "Tags": [
+          "$DEPRECATED"
+        ]
+      },
+      "expected_fatals": [
+        {
+          "pattern": "",
+          "target": "/home/nutanix/data/logs/insights_*"
+        },
+        {
+          "pattern": "",
+          "target": "/home/nutanix/data/logs/ncc_output_collector.out*"
+        }
+      ],
+      "merge_expected_fatals": true,
+      "merge_resource_spec_by_name": true,
+      "resource_spec": [
+        {
+          "config": {
+            "params": {
+              "is_xi": true,
+              "pe_1_hypervisor_type": "$ESX",
+              "pe_1_hypervisor_version": "7.0.0",
+              "pe_1_hypervisors": [
+                "vsphere"
+              ],
+              "pe_2_hypervisors": [
+                "ahv"
+              ],
+              "pe_3_hypervisors": [
+                "ahv"
+              ],
+              "reg_to_vcenter": true,
+              "static_ips": 4
+            },
+            "path": "testcases/dr/draas/template/3pe_2pc.j2"
+          },
+          "type": "$TEMPLATE"
+        }
+      ],
+      "test_args": {
+        "use_default_ipam": false
+      }
+    },
+    "dr.draas.rpj_type_test_failover.test_rpj_failover_network.DraasTestFailover.test_network_failure_while_rp_execution_in_progress___xi": {
+      "expected_fatals": [
+        {
+          "pattern": "",
+          "target": "/home/nutanix/data/logs/insights_*"
+        },
+        {
+          "pattern": "",
+          "target": "/home/nutanix/data/logs/ncc_output_collector.out*"
+        }
+      ],
+      "merge_expected_fatals": true,
+      "resource_spec": [
+        {
+          "config": {
+            "path": "testcases/dr/draas/topology/xi_3pe_2pc.json"
+          },
+          "type": "$TOPOLOGY"
+        }
+      ],
+      "Metadata": {
+        "Tags": [
+          "$DEPRECATED"
+        ]
+      }
+    },
+    "dr.draas.rpj_type_test_failover.test_rpj_failover_network.DraasTestFailover.test_testfailover_with_delay_concurrent_poweron": {
+      "test_args": {
+        "categories": [
+          {
+            "category": {
+              "dept": "eng_tfo"
+            },
+            "uvm_count": 2
+          },
+          {
+            "category": {
+              "dept": "qa_tfo"
+            },
+            "uvm_count": 2
+          }
+        ],
+        "protection_rule_categories": [
+          {
+            "category": {
+              "dept": "eng_tfo"
+            },
+            "filter_type": "CATEGORY"
+          },
+          {
+            "category": {
+              "dept": "qa_tfo"
+            },
+            "filter_type": "CATEGORY"
+          }
+        ],
+        "recovery_plan_stages": [
+          {
+            "category": {
+              "dept": "eng_tfo"
+            },
+            "delay": 120,
+            "entity_filter_type": "CATEGORIES"
+          },
+          {
+            "category": {
+              "dept": "qa_tfo"
+            },
+            "entity_filter_type": "CATEGORIES"
+          }
+        ]
+      },
+      "Metadata": {
+        "Tags": [
+          "$DEPRECATED"
+        ]
+      }
+    },
+    "dr.draas.rpj_type_test_failover.test_rpj_failover_network.DraasTestFailover.test_testfailover_with_delay_concurrent_poweron___ahv_esx": {
+      "Metadata": {
+        "Requirements": [
+          "FEAT-8269"
+        ],
+        "Tags": [
+          "$DEPRECATED"
+        ]
+      },
+      "expected_fatals": [
+        {
+          "pattern": "",
+          "target": "/home/nutanix/data/logs/insights_*"
+        },
+        {
+          "pattern": "",
+          "target": "/home/nutanix/data/logs/ncc_output_collector.out*"
+        }
+      ],
+      "merge_expected_fatals": true,
+      "merge_resource_spec_by_name": true,
+      "resource_spec": [
+        {
+          "config": {
+            "params": {
+              "is_xi": false,
+              "pe_1_hypervisors": [
+                "ahv"
+              ],
+              "pe_2_hypervisor_type": "$ESX",
+              "pe_2_hypervisor_version": "7.0.0",
+              "pe_2_hypervisors": [
+                "vsphere"
+              ],
+              "pe_3_hypervisors": [
+                "ahv"
+              ],
+              "reg_to_vcenter": true,
+              "static_ips": 4
+            },
+            "path": "testcases/dr/draas/template/3pe_2pc.j2"
+          },
+          "type": "$TEMPLATE"
+        }
+      ],
+      "test_args": {
+        "use_default_ipam": false
+      }
+    },
+    "dr.draas.rpj_type_test_failover.test_rpj_failover_network.DraasTestFailover.test_testfailover_with_delay_concurrent_poweron___esx": {
+      "Metadata": {
+        "Requirements": [
+          "FEAT-7207"
+        ],
+        "Tags": [
+          "$DEPRECATED"
+        ]
+      },
+      "merge_resource_spec_by_name": true,
+      "resource_spec": [
+        {
+          "config": {
+            "path": "testcases/dr/draas/topology/onprem_esx_3pe_2pc.json"
+          },
+          "type": "$TOPOLOGY"
+        }
+      ],
+      "test_args": {
+        "use_default_ipam": false
+      }
+    },
+    "dr.draas.rpj_type_test_failover.test_rpj_failover_network.DraasTestFailover.test_testfailover_with_delay_concurrent_poweron___esx_ahv": {
+      "Metadata": {
+        "Requirements": [
+          "FEAT-8269"
+        ],
+        "Tags": [
+          "$DEPRECATED"
+        ]
+      },
+      "expected_fatals": [
+        {
+          "pattern": "",
+          "target": "/home/nutanix/data/logs/insights_*"
+        },
+        {
+          "pattern": "",
+          "target": "/home/nutanix/data/logs/ncc_output_collector.out*"
+        }
+      ],
+      "merge_expected_fatals": true,
+      "merge_resource_spec_by_name": true,
+      "resource_spec": [
+        {
+          "config": {
+            "params": {
+              "is_xi": false,
+              "pe_1_hypervisor_type": "$ESX",
+              "pe_1_hypervisor_version": "7.0.0",
+              "pe_1_hypervisors": [
+                "vsphere"
+              ],
+              "pe_2_hypervisors": [
+                "ahv"
+              ],
+              "pe_3_hypervisors": [
+                "ahv"
+              ],
+              "reg_to_vcenter": true,
+              "static_ips": 4
+            },
+            "path": "testcases/dr/draas/template/3pe_2pc.j2"
+          },
+          "type": "$TEMPLATE"
+        }
+      ],
+      "test_args": {
+        "use_default_ipam": false
+      }
+    },
+    "dr.draas.rpj_type_test_failover.test_rpj_failover_network.DraasTestFailover.test_testfailover_with_delay_concurrent_poweron___esx_xi": {
+      "Metadata": {
+        "Requirements": [
+          "FEAT-8269"
+        ],
+        "Tags": [
+          "$DEPRECATED"
+        ]
+      },
+      "expected_fatals": [
+        {
+          "pattern": "",
+          "target": "/home/nutanix/data/logs/insights_*"
+        },
+        {
+          "pattern": "",
+          "target": "/home/nutanix/data/logs/ncc_output_collector.out*"
+        }
+      ],
+      "merge_expected_fatals": true,
+      "merge_resource_spec_by_name": true,
+      "resource_spec": [
+        {
+          "config": {
+            "params": {
+              "is_xi": true,
+              "pe_1_hypervisor_type": "$ESX",
+              "pe_1_hypervisor_version": "7.0.0",
+              "pe_1_hypervisors": [
+                "vsphere"
+              ],
+              "pe_2_hypervisors": [
+                "ahv"
+              ],
+              "pe_3_hypervisors": [
+                "ahv"
+              ],
+              "reg_to_vcenter": true,
+              "static_ips": 4
+            },
+            "path": "testcases/dr/draas/template/3pe_2pc.j2"
+          },
+          "type": "$TEMPLATE"
+        }
+      ],
+      "test_args": {
+        "use_default_ipam": false
+      }
+    },
+    "dr.draas.rpj_type_test_failover.test_rpj_failover_network.DraasTestFailover.test_testfailover_with_delay_concurrent_poweron___xi": {
+      "expected_fatals": [
+        {
+          "pattern": "",
+          "target": "/home/nutanix/data/logs/insights_*"
+        },
+        {
+          "pattern": "",
+          "target": "/home/nutanix/data/logs/ncc_output_collector.out*"
+        }
+      ],
+      "merge_expected_fatals": true,
+      "resource_spec": [
+        {
+          "config": {
+            "path": "testcases/dr/draas/topology/xi_3pe_2pc.json"
+          },
+          "type": "$TOPOLOGY"
+        }
+      ],
+      "Metadata": {
+        "Tags": [
+          "$DEPRECATED"
+        ]
+      }
+    },
+    "dr.draas.rpj_type_test_failover.test_rpj_failover_network.DraasTestFailover.test_tfo_test_network_deleted": {
+      "test_args": {
+        "categories": [
+          {
+            "category": {
+              "office": "sales"
+            },
+            "uvm_count": 2
+          }
+        ],
+        "non-existent_subnet_name": "vlan3900",
+        "protection_rule_categories": [
+          {
+            "category": {
+              "office": "sales"
+            },
+            "filter_type": "CATEGORY"
+          }
+        ],
+        "recovery_plan_stages": [
+          {
+            "category": {
+              "office": "sales"
+            },
+            "entity_filter_type": "CATEGORIES"
+          }
+        ]
+      }
+    },
+    "dr.draas.rpj_type_test_failover.test_rpj_failover_network.DraasTestFailover.test_tfo_test_network_deleted___esx": {
+      "Metadata": {
+        "Tags": [
+          "$WIP",
+          "$EST_80_PLUS_HRS"
+        ]
+      },
+      "merge_resource_spec_by_name": true,
+      "resource_spec": [
+        {
+          "config": {
+            "path": "testcases/dr/draas/topology/onprem_esx_3pe_2pc.json"
+          },
+          "type": "$TOPOLOGY"
+        }
+      ],
+      "test_args": {
+        "use_default_ipam": false
+      }
+    },
+    "dr.draas.rpj_type_test_failover.test_rpj_failover_network.DraasTestFailover.test_tfo_test_network_deleted___esx_xi": {
+      "Metadata": {
+        "Requirements": [
+          "FEAT-8269"
+        ],
+        "Tags": [
+          "$DEPRECATED"
+        ]
+      },
+      "expected_fatals": [
+        {
+          "pattern": "",
+          "target": "/home/nutanix/data/logs/insights_*"
+        },
+        {
+          "pattern": "",
+          "target": "/home/nutanix/data/logs/ncc_output_collector.out*"
+        }
+      ],
+      "merge_expected_fatals": true,
+      "merge_resource_spec_by_name": true,
+      "resource_spec": [
+        {
+          "config": {
+            "params": {
+              "is_xi": true,
+              "pe_1_hypervisor_type": "$ESX",
+              "pe_1_hypervisor_version": "7.0.0",
+              "pe_1_hypervisors": [
+                "vsphere"
+              ],
+              "pe_2_hypervisors": [
+                "ahv"
+              ],
+              "pe_3_hypervisors": [
+                "ahv"
+              ],
+              "reg_to_vcenter": true,
+              "static_ips": 4
+            },
+            "path": "testcases/dr/draas/template/3pe_2pc.j2"
+          },
+          "type": "$TEMPLATE"
+        }
+      ],
+      "test_args": {
+        "use_default_ipam": false
+      }
+    },
+    "dr.draas.rpj_type_test_failover.test_rpj_failover_network.DraasTestFailover.test_tfo_test_network_deleted___xi": {
+      "expected_fatals": [
+        {
+          "pattern": "",
+          "target": "/home/nutanix/data/logs/insights_*"
+        },
+        {
+          "pattern": "",
+          "target": "/home/nutanix/data/logs/ncc_output_collector.out*"
+        }
+      ],
+      "merge_expected_fatals": true,
+      "resource_spec": [
+        {
+          "config": {
+            "path": "testcases/dr/draas/topology/xi_3pe_2pc.json"
+          },
+          "type": "$TOPOLOGY"
+        }
+      ],
+      "Metadata": {
+        "Tags": [
+          "$DEPRECATED"
+        ]
+      }
+    },
+    "dr.draas.rpj_type_test_failover.test_rpj_failover_network.DraasTestFailover.test_verify_test_failover": {
+      "setup_timeout": 3600,
+      "teardown_timeout": 7200,
+      "test_args": {
+        "categories": [
+          {
+            "category": {
+              "dept": "eng"
+            },
+            "uvm_count": 2
+          }
+        ],
+        "ipam_subnet_details": [
+          {
+            "ip_config": {
+              "default_gateway_ip": "50.21.16.1",
+              "pool_list": [
+                {
+                  "range": "50.21.18.122 50.21.18.159"
+                }
+              ],
+              "prefix_length": 21,
+              "subnet_ip": "50.21.16.0"
+            },
+            "name": "vlan285",
+            "vlan_id": 285
+          }
+        ],
+        "protection_rule_categories": [
+          {
+            "category": {
+              "dept": "eng"
+            },
+            "filter_type": "CATEGORY"
+          }
+        ],
+        "recovery_plan_stages": [
+          {
+            "category": {
+              "dept": "eng"
+            },
+            "entity_filter_type": "CATEGORIES"
+          }
+        ]
+      },
+      "test_timeout": 7200,
+      "Metadata": {
+        "Tags": [
+          "$DEPRECATED"
+        ]
+      }
+    },
+    "dr.draas.rpj_type_test_failover.test_rpj_failover_network.DraasTestFailover.test_verify_test_failover___ahv_esx": {
+      "Metadata": {
+        "Requirements": [
+          "FEAT-8269"
+        ],
+        "Tags": [
+          "$DEPRECATED"
+        ]
+      },
+      "expected_fatals": [
+        {
+          "pattern": "",
+          "target": "/home/nutanix/data/logs/insights_*"
+        },
+        {
+          "pattern": "",
+          "target": "/home/nutanix/data/logs/ncc_output_collector.out*"
+        }
+      ],
+      "merge_expected_fatals": true,
+      "merge_resource_spec_by_name": true,
+      "resource_spec": [
+        {
+          "config": {
+            "params": {
+              "is_xi": false,
+              "pe_1_hypervisors": [
+                "ahv"
+              ],
+              "pe_2_hypervisor_type": "$ESX",
+              "pe_2_hypervisor_version": "7.0.0",
+              "pe_2_hypervisors": [
+                "vsphere"
+              ],
+              "pe_3_hypervisors": [
+                "ahv"
+              ],
+              "reg_to_vcenter": true
+            },
+            "path": "testcases/dr/draas/template/3pe_2pc.j2"
+          },
+          "type": "$TEMPLATE"
+        }
+      ],
+      "test_args": {
+        "use_default_ipam": false
+      }
+    },
+    "dr.draas.rpj_type_test_failover.test_rpj_failover_network.DraasTestFailover.test_verify_test_failover___esx": {
+      "Metadata": {
+        "Requirements": [
+          "FEAT-7207"
+        ],
+        "Tags": [
+          "$DEPRECATED"
+        ]
+      },
+      "merge_resource_spec_by_name": true,
+      "resource_spec": [
+        {
+          "config": {
+            "path": "testcases/dr/draas/topology/onprem_esx_3pe_2pc.json"
+          },
+          "type": "$TOPOLOGY"
+        }
+      ],
+      "test_args": {
+        "new_port_group_name": "TestNet",
+        "new_port_group_vlan_id": 0,
+        "use_default_ipam": false
+      }
+    },
+    "dr.draas.rpj_type_test_failover.test_rpj_failover_network.DraasTestFailover.test_verify_test_failover___esx_ahv": {
+      "Metadata": {
+        "Requirements": [
+          "FEAT-8269"
+        ],
+        "Tags": [
+          "$DEPRECATED"
+        ]
+      },
+      "expected_fatals": [
+        {
+          "pattern": "",
+          "target": "/home/nutanix/data/logs/insights_*"
+        },
+        {
+          "pattern": "",
+          "target": "/home/nutanix/data/logs/ncc_output_collector.out*"
+        }
+      ],
+      "merge_expected_fatals": true,
+      "merge_resource_spec_by_name": true,
+      "resource_spec": [
+        {
+          "config": {
+            "params": {
+              "is_xi": false,
+              "pe_1_hypervisor_type": "$ESX",
+              "pe_1_hypervisor_version": "7.0.0",
+              "pe_1_hypervisors": [
+                "vsphere"
+              ],
+              "pe_2_hypervisors": [
+                "ahv"
+              ],
+              "pe_3_hypervisors": [
+                "ahv"
+              ],
+              "reg_to_vcenter": true
+            },
+            "path": "testcases/dr/draas/template/3pe_2pc.j2"
+          },
+          "type": "$TEMPLATE"
+        }
+      ],
+      "test_args": {
+        "use_default_ipam": false
+      }
+    },
+    "dr.draas.rpj_type_test_failover.test_rpj_failover_network.DraasTestFailover.test_verify_test_failover___esx_xi": {
+      "Metadata": {
+        "Requirements": [
+          "FEAT-8269"
+        ],
+        "Tags": []
+      },
+      "expected_fatals": [
+        {
+          "pattern": "",
+          "target": "/home/nutanix/data/logs/insights_*"
+        },
+        {
+          "pattern": "",
+          "target": "/home/nutanix/data/logs/ncc_output_collector.out*"
+        }
+      ],
+      "merge_expected_fatals": true,
+      "merge_resource_spec_by_name": true,
+      "resource_spec": [
+        {
+          "config": {
+            "params": {
+              "is_xi": true,
+              "pe_1_hypervisor_type": "$ESX",
+              "pe_1_hypervisor_version": "7.0.0",
+              "pe_1_hypervisors": [
+                "vsphere"
+              ],
+              "pe_2_hypervisors": [
+                "ahv"
+              ],
+              "pe_3_hypervisors": [
+                "ahv"
+              ],
+              "reg_to_vcenter": true
+            },
+            "path": "testcases/dr/draas/template/3pe_2pc.j2"
+          },
+          "type": "$TEMPLATE"
+        }
+      ],
+      "test_args": {
+        "use_default_ipam": false
+      }
+    },
+    "dr.draas.rpj_type_test_failover.test_rpj_failover_network.DraasTestFailover.test_verify_test_failover___multihome": {
+      "Metadata": {
+        "Requirements": [
+          "FEAT-6399"
+        ],
+        "Tags": [
+          "$EXCLUDED"
+        ]
+      },
+      "pre_run": [
+        {
+          "name": "workflows.infrastructure.common.setup_multihome",
+          "stage": "TEST_PRERUN"
+        }
+      ],
+      "resource_spec": [
+        {
+          "config": {
+            "path": "testcases/dr/draas/topology/multihome/onprem_3pe_2pc.json"
+          },
+          "type": "$TOPOLOGY"
+        }
+      ],
+      "test_args": {
+        "with_dvs": false,
+        "with_lacp": false
+      }
+    },
+    "dr.draas.rpj_type_test_failover.test_rpj_failover_network.DraasTestFailover.test_verify_test_failover___xi": {
+      "expected_fatals": [
+        {
+          "pattern": "",
+          "target": "/home/nutanix/data/logs/insights_*"
+        },
+        {
+          "pattern": "",
+          "target": "/home/nutanix/data/logs/ncc_output_collector.out*"
+        }
+      ],
+      "merge_expected_fatals": true,
+      "resource_spec": [
+        {
+          "config": {
+            "path": "testcases/dr/draas/topology/xi_3pe_2pc.json"
+          },
+          "type": "$TOPOLOGY"
+        }
+      ]
+    },
+    "dr.draas.rpj_type_test_failover.test_rpj_failover_network.DraasTestFailover.test_verify_test_failover_explicit_vms": {
+      "setup_timeout": 3600,
+      "teardown_timeout": 7200,
+      "test_args": {
+        "categories": [
+          {
+            "category": {
+              "dept": "eng"
+            },
+            "uvm_count": 1
+          },
+          {
+            "category": {
+              "office": "hr"
+            },
+            "uvm_count": 1
+          }
+        ],
+        "protection_rule_categories": [
+          {
+            "category": {
+              "dept": "eng"
+            },
+            "filter_type": "CATEGORY"
+          },
+          {
+            "category": {
+              "office": "hr"
+            },
+            "filter_type": "CATEGORY"
+          }
+        ],
+        "recovery_plan_stages": [
+          {
+            "category": {
+              "dept": "eng"
+            },
+            "entity_filter_type": "ENTITY"
+          },
+          {
+            "category": {
+              "office": "hr"
+            },
+            "entity_filter_type": "ENTITY"
+          }
+        ]
+      },
+      "test_timeout": 7200
+    },
+    "dr.draas.rpj_type_test_failover.test_rpj_failover_network.DraasTestFailover.test_verify_test_failover_explicit_vms___ahv_esx": {
+      "Metadata": {
+        "Requirements": [
+          "FEAT-8269"
+        ],
+        "Tags": [
+          "$DEPRECATED"
+        ]
+      },
+      "expected_fatals": [
+        {
+          "pattern": "",
+          "target": "/home/nutanix/data/logs/insights_*"
+        },
+        {
+          "pattern": "",
+          "target": "/home/nutanix/data/logs/ncc_output_collector.out*"
+        }
+      ],
+      "merge_expected_fatals": true,
+      "merge_resource_spec_by_name": true,
+      "resource_spec": [
+        {
+          "config": {
+            "params": {
+              "is_xi": false,
+              "pe_1_hypervisors": [
+                "ahv"
+              ],
+              "pe_2_hypervisor_type": "$ESX",
+              "pe_2_hypervisor_version": "7.0.0",
+              "pe_2_hypervisors": [
+                "vsphere"
+              ],
+              "pe_3_hypervisors": [
+                "ahv"
+              ],
+              "reg_to_vcenter": true,
+              "static_ips": 4
+            },
+            "path": "testcases/dr/draas/template/3pe_2pc.j2"
+          },
+          "type": "$TEMPLATE"
+        }
+      ],
+      "test_args": {
+        "use_default_ipam": false
+      }
+    },
+    "dr.draas.rpj_type_test_failover.test_rpj_failover_network.DraasTestFailover.test_verify_test_failover_explicit_vms___esx": {
+      "Metadata": {
+        "Requirements": [
+          "FEAT-7207"
+        ],
+        "Tags": [
+          "$DEPRECATED"
+        ]
+      },
+      "merge_resource_spec_by_name": true,
+      "resource_spec": [
+        {
+          "config": {
+            "path": "testcases/dr/draas/topology/onprem_esx_3pe_2pc.json"
+          },
+          "type": "$TOPOLOGY"
+        }
+      ],
+      "test_args": {
+        "use_default_ipam": false
+      }
+    },
+    "dr.draas.rpj_type_test_failover.test_rpj_failover_network.DraasTestFailover.test_verify_test_failover_explicit_vms___esx_ahv": {
+      "Metadata": {
+        "Requirements": [
+          "FEAT-8269"
+        ],
+        "Tags": [
+          "$DEPRECATED"
+        ]
+      },
+      "expected_fatals": [
+        {
+          "pattern": "",
+          "target": "/home/nutanix/data/logs/insights_*"
+        },
+        {
+          "pattern": "",
+          "target": "/home/nutanix/data/logs/ncc_output_collector.out*"
+        }
+      ],
+      "merge_expected_fatals": true,
+      "merge_resource_spec_by_name": true,
+      "resource_spec": [
+        {
+          "config": {
+            "params": {
+              "is_xi": false,
+              "pe_1_hypervisor_type": "$ESX",
+              "pe_1_hypervisor_version": "7.0.0",
+              "pe_1_hypervisors": [
+                "vsphere"
+              ],
+              "pe_2_hypervisors": [
+                "ahv"
+              ],
+              "pe_3_hypervisors": [
+                "ahv"
+              ],
+              "reg_to_vcenter": true,
+              "static_ips": 4
+            },
+            "path": "testcases/dr/draas/template/3pe_2pc.j2"
+          },
+          "type": "$TEMPLATE"
+        }
+      ],
+      "test_args": {
+        "use_default_ipam": false
+      }
+    },
+    "dr.draas.rpj_type_test_failover.test_rpj_failover_network.DraasTestFailover.test_verify_test_failover_explicit_vms___esx_xi": {
+      "Metadata": {
+        "Requirements": [
+          "FEAT-8269"
+        ],
+        "Tags": [
+          "$DEPRECATED"
+        ]
+      },
+      "expected_fatals": [
+        {
+          "pattern": "",
+          "target": "/home/nutanix/data/logs/insights_*"
+        },
+        {
+          "pattern": "",
+          "target": "/home/nutanix/data/logs/ncc_output_collector.out*"
+        }
+      ],
+      "merge_expected_fatals": true,
+      "merge_resource_spec_by_name": true,
+      "resource_spec": [
+        {
+          "config": {
+            "params": {
+              "is_xi": true,
+              "pe_1_hypervisor_type": "$ESX",
+              "pe_1_hypervisor_version": "7.0.0",
+              "pe_1_hypervisors": [
+                "vsphere"
+              ],
+              "pe_2_hypervisors": [
+                "ahv"
+              ],
+              "pe_3_hypervisors": [
+                "ahv"
+              ],
+              "reg_to_vcenter": true,
+              "static_ips": 4
+            },
+            "path": "testcases/dr/draas/template/3pe_2pc.j2"
+          },
+          "type": "$TEMPLATE"
+        }
+      ],
+      "test_args": {
+        "use_default_ipam": false
+      }
+    },
+    "dr.draas.rpj_type_test_failover.test_rpj_failover_network.DraasTestFailover.test_verify_test_failover_explicit_vms___xi": {
+      "Metadata": {
+        "Tags": [
+          "$DEPRECATED"
+        ]
+      },
+      "expected_fatals": [
+        {
+          "pattern": "",
+          "target": "/home/nutanix/data/logs/insights_*"
+        },
+        {
+          "pattern": "",
+          "target": "/home/nutanix/data/logs/ncc_output_collector.out*"
+        }
+      ],
+      "merge_expected_fatals": true,
+      "resource_spec": [
+        {
+          "config": {
+            "path": "testcases/dr/draas/topology/xi_3pe_2pc.json"
+          },
+          "type": "$TOPOLOGY"
+        }
+      ]
+    },
+    "dr.draas.rpj_type_test_failover.test_rpj_failover_network.DraasTestFailover.test_verify_test_failover_without_test_network": {
+      "test_args": {
+        "create_test_subnets": false,
+        "categories": [
+          {
+            "category": {
+              "dept": "eng"
+            },
+            "uvm_count": 1
+          }
+        ],
+        "protection_rule_categories": [
+          {
+            "category": {
+              "dept": "eng"
+            },
+            "filter_type": "CATEGORY"
+          }
+        ],
+        "recovery_plan_stages": [
+          {
+            "category": {
+              "dept": "eng"
+            },
+            "entity_filter_type": "CATEGORIES"
+          }
+        ]
+      }
+    },
+    "dr.draas.rpj_type_test_failover.test_rpj_failover_network.DraasTestFailover.test_verify_test_failover_without_test_network___esx": {
+      "Metadata": {
+        "Requirements": [
+          "FEAT-7207"
+        ],
+        "Tags": [
+          "$DEPRECATED"
+        ]
+      },
+      "merge_resource_spec_by_name": true,
+      "resource_spec": [
+        {
+          "config": {
+            "path": "testcases/dr/draas/topology/onprem_esx_3pe_2pc.json"
+          },
+          "type": "$TOPOLOGY"
+        }
+      ],
+      "test_args": {
+        "use_default_ipam": false
+      }
+    },
+    "dr.draas.rpj_type_test_failover.test_rpj_failover_network.DraasTestFailover.test_verify_test_failover_without_test_network___esx_xi": {
+      "Metadata": {
+        "Requirements": [
+          "FEAT-8269"
+        ],
+        "Tags": [
+          "$DEPRECATED"
+        ]
+      },
+      "expected_fatals": [
+        {
+          "pattern": "",
+          "target": "/home/nutanix/data/logs/insights_*"
+        },
+        {
+          "pattern": "",
+          "target": "/home/nutanix/data/logs/ncc_output_collector.out*"
+        }
+      ],
+      "merge_expected_fatals": true,
+      "merge_resource_spec_by_name": true,
+      "resource_spec": [
+        {
+          "config": {
+            "params": {
+              "is_xi": true,
+              "pe_1_hypervisor_type": "$ESX",
+              "pe_1_hypervisor_version": "7.0.0",
+              "pe_1_hypervisors": [
+                "vsphere"
+              ],
+              "pe_2_hypervisors": [
+                "ahv"
+              ],
+              "pe_3_hypervisors": [
+                "ahv"
+              ],
+              "reg_to_vcenter": true,
+              "static_ips": 4
+            },
+            "path": "testcases/dr/draas/template/3pe_2pc.j2"
+          },
+          "type": "$TEMPLATE"
+        }
+      ],
+      "test_args": {
+        "use_default_ipam": false
+      }
+    },
+    "dr.draas.rpj_type_test_failover.test_rpj_failover_network.DraasTestFailover.test_verify_test_failover_without_test_network___xi": {
+      "expected_fatals": [
+        {
+          "pattern": "",
+          "target": "/home/nutanix/data/logs/insights_*"
+        },
+        {
+          "pattern": "",
+          "target": "/home/nutanix/data/logs/ncc_output_collector.out*"
+        }
+      ],
+      "merge_expected_fatals": true,
+      "resource_spec": [
+        {
+          "config": {
+            "path": "testcases/dr/draas/topology/xi_3pe_2pc.json"
+          },
+          "type": "$TOPOLOGY"
+        }
+      ],
+      "Metadata": {
+        "Tags": [
+          "$DEPRECATED"
+        ]
+      }
+    },
+    "dr.draas.rpj_type_test_failover.test_rpj_failover_network.DraasTestFailover.test_verify_tfo_after_vms_delete": {
+      "test_args": {
+        "categories": [
+          {
+            "category": {
+              "dept": "sanskrit"
+            },
+            "uvm_count": 2
+          }
+        ],
+        "protection_rule_categories": [
+          {
+            "category": {
+              "dept": "sanskrit"
+            },
+            "filter_type": "CATEGORY"
+          }
+        ],
+        "recovery_plan_stages": [
+          {
+            "category": {
+              "dept": "sanskrit"
+            },
+            "entity_filter_type": "CATEGORIES"
+          }
+        ],
+        "uvm_delete_list": [
+          {
+            "category": {
+              "dept": "sanskrit"
+            },
+            "uvm_count": 1
+          }
+        ]
+      }
+    },
+    "dr.draas.rpj_type_test_failover.test_rpj_failover_network.DraasTestFailover.test_verify_tfo_after_vms_delete___xi": {
+      "expected_fatals": [
+        {
+          "pattern": "",
+          "target": "/home/nutanix/data/logs/insights_*"
+        },
+        {
+          "pattern": "",
+          "target": "/home/nutanix/data/logs/ncc_output_collector.out*"
+        }
+      ],
+      "merge_expected_fatals": true,
+      "resource_spec": [
+        {
+          "config": {
+            "path": "testcases/dr/draas/topology/xi_3pe_2pc.json"
+          },
+          "type": "$TOPOLOGY"
+        }
+      ]
+    },
+    "dr.draas.rpj_type_test_failover.test_rpj_failover_network_xi_onprem.DraasTestFailoverXi.test_verify_failover_xi_onprem": {
+      "Metadata": {
+        "Requirements": [
+          "FEAT-3429",
+          "ENG-105800"
+        ],
+        "Tags": [
+          "$DEPRECATED"
+        ]
+      },
+      "resource_spec": [
+        {
+          "config": {
+            "path": "testcases/dr/draas/topology/onprem_3pe_2pc.json"
+          },
+          "type": "$TOPOLOGY"
+        }
+      ],
+      "test_args": {
+        "categories": [
+          {
+            "category": {
+              "dept": "eng"
+            },
+            "uvm_count": 1
+          }
+        ],
+        "protection_rule_categories": [
+          {
+            "category": {
+              "dept": "eng"
+            },
+            "filter_type": "CATEGORY"
+          }
+        ],
+        "recovery_plan_stages": [
+          {
+            "category": {
+              "dept": "eng"
+            },
+            "entity_filter_type": "CATEGORIES"
+          }
+        ],
+        "validate_network": false
+      }
+    },
+    "dr.draas.rpj_type_test_failover.test_rpj_failover_network_xi_onprem.DraasTestFailoverXi.test_verify_failover_xi_onprem___esx_xi": {
+      "Metadata": {
+        "Tags": [
+          "$WIP",
+          "$EST_80_PLUS_HRS"
+        ]
+      },
+      "expected_fatals": [
+        {
+          "pattern": "",
+          "target": "/home/nutanix/data/logs/insights_*"
+        },
+        {
+          "pattern": "",
+          "target": "/home/nutanix/data/logs/ncc_output_collector.out*"
+        }
+      ],
+      "merge_expected_fatals": true,
+      "merge_resource_spec_by_name": true,
+      "resource_spec": [
+        {
+          "config": {
+            "params": {
+              "is_xi": true,
+              "pe_1_hypervisor_type": "$ESX",
+              "pe_1_hypervisor_version": "7.0.0",
+              "pe_1_hypervisors": [
+                "vsphere"
+              ],
+              "pe_2_hypervisors": [
+                "ahv"
+              ],
+              "pe_3_hypervisors": [
+                "ahv"
+              ],
+              "reg_to_vcenter": true,
+              "static_ips": 4
+            },
+            "path": "testcases/dr/draas/template/3pe_2pc.j2"
+          },
+          "type": "$TEMPLATE"
+        }
+      ]
+    },
+    "dr.draas.rpj_type_test_failover.test_rpj_failover_network_xi_onprem.DraasTestFailoverXi.test_verify_failover_xi_onprem___xi": {
+      "expected_fatals": [
+        {
+          "pattern": "",
+          "target": "/home/nutanix/data/logs/insights_*"
+        },
+        {
+          "pattern": "",
+          "target": "/home/nutanix/data/logs/ncc_output_collector.out*"
+        }
+      ],
+      "merge_expected_fatals": true,
+      "resource_spec": [
+        {
+          "config": {
+            "path": "testcases/dr/draas/topology/xi_3pe_2pc.json"
+          },
+          "type": "$TOPOLOGY"
+        }
+      ]
+    },
+    "dr.draas.rpj_type_test_failover.test_rpj_failover_network_xi_onprem.DraasTestFailoverXi.test_verify_test_failover_xi_onprem": {
+      "Metadata": {
+        "Requirements": [
+          "FEAT-3429",
+          "ENG-105800"
+        ],
+        "Tags": [
+          "$DEPRECATED"
+        ]
+      },
+      "resource_spec": [
+        {
+          "config": {
+            "path": "testcases/dr/draas/topology/onprem_3pe_2pc.json"
+          },
+          "type": "$TOPOLOGY"
+        }
+      ],
+      "test_args": {
+        "categories": [
+          {
+            "category": {
+              "dept": "eng"
+            },
+            "uvm_count": 1
+          }
+        ],
+        "protection_rule_categories": [
+          {
+            "category": {
+              "dept": "eng"
+            },
+            "filter_type": "CATEGORY"
+          }
+        ],
+        "recovery_plan_stages": [
+          {
+            "category": {
+              "dept": "eng"
+            },
+            "entity_filter_type": "CATEGORIES"
+          }
+        ],
+        "validate_network": true
+      }
+    },
+    "dr.draas.rpj_type_test_failover.test_rpj_failover_network_xi_onprem.DraasTestFailoverXi.test_verify_test_failover_xi_onprem___esx_xi": {
+      "Metadata": {
+        "Tags": [
+          "$WIP",
+          "$EST_80_PLUS_HRS"
+        ]
+      },
+      "expected_fatals": [
+        {
+          "pattern": "",
+          "target": "/home/nutanix/data/logs/insights_*"
+        },
+        {
+          "pattern": "",
+          "target": "/home/nutanix/data/logs/ncc_output_collector.out*"
+        }
+      ],
+      "merge_expected_fatals": true,
+      "merge_resource_spec_by_name": true,
+      "resource_spec": [
+        {
+          "config": {
+            "params": {
+              "is_xi": true,
+              "pe_1_hypervisor_type": "$ESX",
+              "pe_1_hypervisor_version": "7.0.0",
+              "pe_1_hypervisors": [
+                "vsphere"
+              ],
+              "pe_2_hypervisors": [
+                "ahv"
+              ],
+              "pe_3_hypervisors": [
+                "ahv"
+              ],
+              "reg_to_vcenter": true,
+              "static_ips": 4
+            },
+            "path": "testcases/dr/draas/template/3pe_2pc.j2"
+          },
+          "type": "$TEMPLATE"
+        }
+      ]
+    },
+    "dr.draas.rpj_type_test_failover.test_rpj_failover_network_xi_onprem.DraasTestFailoverXi.test_verify_test_failover_xi_onprem___xi": {
+      "expected_fatals": [
+        {
+          "pattern": "",
+          "target": "/home/nutanix/data/logs/insights_*"
+        },
+        {
+          "pattern": "",
+          "target": "/home/nutanix/data/logs/ncc_output_collector.out*"
+        }
+      ],
+      "merge_expected_fatals": true,
+      "resource_spec": [
+        {
+          "config": {
+            "path": "testcases/dr/draas/topology/xi_3pe_2pc.json"
+          },
+          "type": "$TOPOLOGY"
+        }
+      ]
+    },
+    "dr.draas.rpj_type_test_failover.test_rpj_negative_test_failover.DraasNegativeTestFailover": {
+      "resource_spec": [
+        {
+          "config": {
+            "path": "testcases/dr/draas/topology/onprem_3pe_2pc.json"
+          },
+          "type": "$TOPOLOGY"
+        }
+      ],
+      "setup_timeout": 3600,
+      "test_timeout": 3600
+    },
+    "dr.draas.rpj_type_test_failover.test_rpj_negative_test_failover.DraasNegativeTestFailover.test_tfo_vm_register_failure_when_uhura_down": {
+      "test_args": {
+        "categories": [
+          {
+            "category": {
+              "dept": "hr"
+            },
+            "uvm_count": 1
+          }
+        ],
+        "protection_rule_categories": [
+          {
+            "category": {
+              "dept": "hr"
+            },
+            "filter_type": "CATEGORY"
+          }
+        ],
+        "recovery_plan_stages": [
+          {
+            "category": {
+              "dept": "hr"
+            },
+            "entity_filter_type": "CATEGORIES"
+          }
+        ]
+      }
+    },
+    "dr.draas.rpj_type_test_failover.test_rpj_negative_test_failover.DraasNegativeTestFailover.test_tfo_vm_register_failure_when_uhura_down___esx": {
+      "Metadata": {
+        "Requirements": [
+          "FEAT-7207"
+        ],
+        "Tags": []
+      },
+      "merge_resource_spec_by_name": true,
+      "resource_spec": [
+        {
+          "config": {
+            "path": "testcases/dr/draas/topology/onprem_esx_3pe_2pc.json"
+          },
+          "type": "$TOPOLOGY"
+        }
+      ],
+      "test_args": {
+        "use_default_ipam": false
+      }
+    },
+    "dr.draas.rpj_type_test_failover.test_rpj_negative_test_failover.DraasNegativeTestFailover.test_tfo_vm_register_failure_when_uhura_down___esx_xi": {
+      "Metadata": {
+        "Requirements": [
+          "FEAT-8269"
+        ],
+        "Tags": [
+          "$DEPRECATED"
+        ]
+      },
+      "expected_fatals": [
+        {
+          "pattern": "",
+          "target": "/home/nutanix/data/logs/insights_*"
+        },
+        {
+          "pattern": "",
+          "target": "/home/nutanix/data/logs/ncc_output_collector.out*"
+        }
+      ],
+      "merge_expected_fatals": true,
+      "merge_resource_spec_by_name": true,
+      "resource_spec": [
+        {
+          "config": {
+            "params": {
+              "is_xi": true,
+              "pe_1_hypervisor_type": "$ESX",
+              "pe_1_hypervisor_version": "7.0.0",
+              "pe_1_hypervisors": [
+                "vsphere"
+              ],
+              "pe_2_hypervisors": [
+                "ahv"
+              ],
+              "pe_3_hypervisors": [
+                "ahv"
+              ],
+              "reg_to_vcenter": true,
+              "static_ips": 4
+            },
+            "path": "testcases/dr/draas/template/3pe_2pc.j2"
+          },
+          "type": "$TEMPLATE"
+        }
+      ],
+      "test_args": {
+        "use_default_ipam": false
+      }
+    },
+    "dr.draas.rpj_type_test_failover.test_rpj_negative_test_failover.DraasNegativeTestFailover.test_tfo_vm_register_failure_when_uhura_down___xi": {
+      "expected_fatals": [
+        {
+          "pattern": "",
+          "target": "/home/nutanix/data/logs/insights_*"
+        },
+        {
+          "pattern": "",
+          "target": "/home/nutanix/data/logs/ncc_output_collector.out*"
+        }
+      ],
+      "merge_expected_fatals": true,
+      "resource_spec": [
+        {
+          "config": {
+            "path": "testcases/dr/draas/topology/xi_3pe_2pc.json"
+          },
+          "type": "$TOPOLOGY"
+        }
+      ],
+      "Metadata": {
+        "Tags": [
+          "$DEPRECATED"
+        ]
+      }
+    },
+    "dr.draas.rpj_type_test_failover.test_rpj_type_test_failover.DraasTestFailover": {
+      "resource_spec": [
+        {
+          "config": {
+            "path": "testcases/dr/draas/topology/onprem_3pe_2pc.json"
+          },
+          "type": "$TOPOLOGY"
+        }
+      ],
+      "setup_timeout": 3600,
+      "test_args": {
+        "categories": [
+          {
+            "category": null,
+            "uvm_count": 1
+          }
+        ],
+        "dummy_vm": false,
+        "validate_network": true
+      },
+      "test_timeout": 3600
+    },
+    "dr.draas.rpj_type_test_failover.test_rpj_type_test_failover.DraasTestFailover.test_rpj_test_failover_vm_special_category_no_pr": {
+      "test_args": {
+        "categories": [
+          {
+            "category": {
+              "dept": "eng"
+            },
+            "uvm_count": 1
+          }
+        ],
+        "protection_rule_categories": [
+          {
+            "category": {
+              "dept": "eng"
+            },
+            "filter_type": "CATEGORY"
+          }
+        ],
+        "recovery_plan_stages": [
+          {
+            "category": {
+              "dept": "eng"
+            },
+            "entity_filter_type": "CATEGORIES"
+          }
+        ]
+      }
+    },
+    "dr.draas.rpj_type_test_failover.test_rpj_type_test_failover.DraasTestFailover.test_rpj_test_failover_vm_special_category_no_pr___ahv_esx": {
+      "Metadata": {
+        "Requirements": [
+          "FEAT-8269"
+        ],
+        "Tags": [
+          "$DEPRECATED"
+        ]
+      },
+      "expected_fatals": [
+        {
+          "pattern": "",
+          "target": "/home/nutanix/data/logs/insights_*"
+        },
+        {
+          "pattern": "",
+          "target": "/home/nutanix/data/logs/ncc_output_collector.out*"
+        }
+      ],
+      "merge_expected_fatals": true,
+      "merge_resource_spec_by_name": true,
+      "resource_spec": [
+        {
+          "config": {
+            "params": {
+              "is_xi": false,
+              "pe_1_hypervisors": [
+                "ahv"
+              ],
+              "pe_2_hypervisor_type": "$ESX",
+              "pe_2_hypervisor_version": "7.0.0",
+              "pe_2_hypervisors": [
+                "vsphere"
+              ],
+              "pe_3_hypervisors": [
+                "ahv"
+              ],
+              "reg_to_vcenter": true,
+              "static_ips": 4
+            },
+            "path": "testcases/dr/draas/template/3pe_2pc.j2"
+          },
+          "type": "$TEMPLATE"
+        }
+      ]
+    },
+    "dr.draas.rpj_type_test_failover.test_rpj_type_test_failover.DraasTestFailover.test_rpj_test_failover_vm_special_category_no_pr___esx": {
+      "Metadata": {
+        "Tags": [
+          "$DEPRECATED"
+        ]
+      }
+    },
+    "dr.draas.rpj_type_test_failover.test_rpj_type_test_failover.DraasTestFailover.test_rpj_test_failover_vm_special_category_no_pr___esx_xi": {
+      "Metadata": {
+        "Tags": [
+          "$DEPRECATED"
+        ]
+      },
+      "expected_fatals": [
+        {
+          "pattern": "",
+          "target": "/home/nutanix/data/logs/insights_*"
+        },
+        {
+          "pattern": "",
+          "target": "/home/nutanix/data/logs/ncc_output_collector.out*"
+        }
+      ],
+      "merge_expected_fatals": true,
+      "merge_resource_spec_by_name": true,
+      "resource_spec": [
+        {
+          "config": {
+            "params": {
+              "is_xi": true,
+              "pe_1_hypervisor_type": "$ESX",
+              "pe_1_hypervisor_version": "7.0.0",
+              "pe_1_hypervisors": [
+                "vsphere"
+              ],
+              "pe_2_hypervisors": [
+                "ahv"
+              ],
+              "pe_3_hypervisors": [
+                "ahv"
+              ],
+              "reg_to_vcenter": true,
+              "static_ips": 4
+            },
+            "path": "testcases/dr/draas/template/3pe_2pc.j2"
+          },
+          "type": "$TEMPLATE"
+        }
+      ]
+    },
+    "dr.draas.rpj_type_test_failover.test_rpj_type_test_failover.DraasTestFailover.test_rpj_test_failover_vm_special_category_no_pr___xi": {
+      "expected_fatals": [
+        {
+          "pattern": "",
+          "target": "/home/nutanix/data/logs/insights_*"
+        },
+        {
+          "pattern": "",
+          "target": "/home/nutanix/data/logs/ncc_output_collector.out*"
+        }
+      ],
+      "merge_expected_fatals": true,
+      "resource_spec": [
+        {
+          "config": {
+            "path": "testcases/dr/draas/topology/xi_3pe_2pc.json"
+          },
+          "type": "$TOPOLOGY"
+        }
+      ]
+    },
+    "dr.draas.rpj_type_test_failover.test_rpj_type_test_failover.DraasTestFailover.test_tfo_ipam_network_exhausted": {
+      "test_args": {
+        "categories": [
+          {
+            "category": {
+              "cat1": "val1"
+            },
+            "uvm_count": 5
+          },
+          {
+            "category": {
+              "cat2": "val2"
+            },
+            "uvm_count": 5
+          }
+        ],
+        "protection_rule_categories": [
+          {
+            "category": {
+              "cat1": "val1"
+            },
+            "filter_type": "CATEGORY"
+          },
+          {
+            "category": {
+              "cat2": "val2"
+            },
+            "filter_type": "CATEGORY"
+          }
+        ],
+        "recovery_plan_stages_1": [
+          {
+            "category": {
+              "cat1": "val1"
+            },
+            "entity_filter_type": "CATEGORIES"
+          }
+        ],
+        "recovery_plan_stages_2": [
+          {
+            "category": {
+              "cat2": "val2"
+            },
+            "entity_filter_type": "CATEGORIES"
+          }
+        ],
+        "test_subnet_details": [
+          {
+            "ip_config": {
+              "default_gateway_ip": "10.5.120.1",
+              "pool_list": [
+                {
+                  "range": "10.5.120.2 10.5.127.253"
+                }
+              ],
+              "prefix_length": 21,
+              "subnet_ip": "10.5.120.0"
+            },
+            "name": "vlan2000",
+            "vlan_id": 2000
+          }
+        ]
+      }
+    },
+    "dr.draas.rpj_type_test_failover.test_rpj_type_test_failover.DraasTestFailover.test_tfo_ipam_network_exhausted___esx": {
+      "Metadata": {
+        "Tags": [
+          "$WIP",
+          "$EST_80_PLUS_HRS"
+        ]
+      },
+      "merge_resource_spec_by_name": true,
+      "resource_spec": [
+        {
+          "config": {
+            "path": "testcases/dr/draas/topology/onprem_esx_3pe_2pc.json"
+          },
+          "type": "$TOPOLOGY"
+        }
+      ]
+    },
+    "dr.draas.rpj_type_test_failover.test_rpj_type_test_failover.DraasTestFailover.test_tfo_ipam_network_exhausted___esx_xi": {
+      "Metadata": {
+        "Tags": [
+          "$WIP",
+          "$EST_80_PLUS_HRS"
+        ]
+      },
+      "merge_expected_fatals": true,
+      "merge_resource_spec_by_name": true,
+      "resource_spec": [
+        {
+          "config": {
+            "params": {
+              "is_xi": true,
+              "pe_1_hypervisor_type": "$ESX",
+              "pe_1_hypervisor_version": "7.0.0",
+              "pe_1_hypervisors": [
+                "vsphere"
+              ],
+              "pe_2_hypervisors": [
+                "ahv"
+              ],
+              "pe_3_hypervisors": [
+                "ahv"
+              ],
+              "reg_to_vcenter": true,
+              "static_ips": 4
+            },
+            "path": "testcases/dr/draas/template/3pe_2pc.j2"
+          },
+          "type": "$TEMPLATE"
+        }
+      ]
+    },
+    "dr.draas.rpj_type_test_failover.test_rpj_type_test_failover.DraasTestFailover.test_tfo_ipam_network_exhausted___xi": {
+      "merge_expected_fatals": true,
+      "resource_spec": [
+        {
+          "config": {
+            "path": "testcases/dr/draas/topology/xi_3pe_2pc.json"
+          },
+          "type": "$TOPOLOGY"
+        }
+      ]
+    }
+  }
+}
