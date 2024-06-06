@@ -1,5 +1,6 @@
 import json
 from sklearn.feature_extraction.text import TfidfVectorizer
+from sklearn.metrics.pairwise import cosine_similarity
 from sklearn.cluster import KMeans
 import numpy as np
 
@@ -24,12 +25,12 @@ def calculate_similarity(test_cases):
     test_case_texts = [combine_attributes(test_cases[key]) for key in test_case_keys]
 
     vectorizer = TfidfVectorizer().fit_transform(test_case_texts)
-    vectors = vectorizer.toarray()
+    cosine_sim_matrix = cosine_similarity(vectorizer)
 
-    return vectors, test_case_keys
+    return cosine_sim_matrix, test_case_keys
 
-def kmeans_clustering(vectors, test_case_keys, num_clusters=4):
-    kmeans = KMeans(n_clusters=num_clusters, random_state=0).fit(vectors)
+def kmeans_clustering(similarity_matrix, test_case_keys, num_clusters=4):
+    kmeans = KMeans(n_clusters=num_clusters, random_state=0).fit(similarity_matrix)
     clusters = {i: [] for i in range(num_clusters)}
     for idx, label in enumerate(kmeans.labels_):
         clusters[label].append(test_case_keys[idx])
@@ -51,16 +52,15 @@ def main(config_path):
 
     execution_times = {key: test_cases[key].get('test_timeout', 0) for key in test_cases.keys()}
 
-    vectors, test_case_keys = calculate_similarity(test_cases)
+    similarity_matrix, test_case_keys = calculate_similarity(test_cases)
     num_clusters = 8
-    clusters = kmeans_clustering(vectors, test_case_keys, num_clusters)
+    clusters = kmeans_clustering(similarity_matrix, test_case_keys, num_clusters)
 
     print("Groups of similar test cases:")
     for cluster_id, group in clusters.items():
         print("Cluster {}: {}".format(cluster_id, ', '.join(group)))
 
     normal_time, optimized_time = measure_execution_time(clusters, test_cases, execution_times)
-
     print("Normal Execution Time: {} seconds".format(normal_time))
     print("Optimized Execution Time: {} seconds".format(optimized_time))
 
